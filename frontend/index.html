@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>User Authentication</title>
+    <!-- Replace Tailwind CSS CDN with local build -->
+    <link href="styles/tailwind.css" rel="stylesheet" />
+    <script defer src="script.js"></script>
+    <!-- Link JavaScript -->
+  </head>
+  <body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="w-full max-w-md bg-white p-6 rounded-lg shadow-md">
+      <!-- Title -->
+      <h2 class="text-2xl font-bold text-center mb-4">User Authentication</h2>
+
+      <!-- Alert Message -->
+      <div id="alert" class="hidden p-2 mb-4 text-white rounded"></div>
+
+      <!-- Tabs (Login / Register) -->
+      <div class="flex justify-around mb-4">
+        <button id="showLogin" class="tab-btn text-blue-500 font-semibold">
+          Login
+        </button>
+        <button id="showRegister" class="tab-btn text-gray-500">
+          Register
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <form id="loginForm" class="auth-form">
+        <input
+          type="email"
+          id="loginEmail"
+          placeholder="Email"
+          class="w-full p-2 border rounded mb-2"
+        />
+        <input
+          type="password"
+          id="loginPassword"
+          placeholder="Password"
+          class="w-full p-2 border rounded mb-4"
+        />
+        <button
+          type="submit"
+          class="w-full bg-blue-500 text-white py-2 rounded"
+        >
+          Login
+        </button>
+      </form>
+
+      <!-- Register Form (Hidden by Default) -->
+      <form id="registerForm" class="auth-form hidden">
+        <input
+          type="text"
+          id="registerUsername"
+          placeholder="Username"
+          class="w-full p-2 border rounded mb-2"
+        />
+        <input
+          type="email"
+          id="registerEmail"
+          placeholder="Email"
+          class="w-full p-2 border rounded mb-2"
+        />
+        <input
+          type="password"
+          id="registerPassword"
+          placeholder="Password"
+          class="w-full p-2 border rounded mb-4"
+        />
+        <button
+          type="submit"
+          class="w-full bg-green-500 text-white py-2 rounded"
+        >
+          Register
+        </button>
+      </form>
+
+      <!-- Logout Button -->
+      <button
+        id="logoutBtn"
+        class="hidden w-full bg-red-500 text-white py-2 rounded mt-4"
+      >
+        Logout
+      </button>
+
+      <!-- User Profile Info -->
+      <div id="profile" class="hidden mt-4 text-center">
+        <h3 class="text-xl font-bold">Welcome, <span id="username"></span>!</h3>
+      </div>
+    </div>
+  </body>
+</html>
