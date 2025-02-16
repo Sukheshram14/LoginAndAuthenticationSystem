@@ -4,7 +4,10 @@ const bcrypt = require("bcryptjs"); // Bcrypt for password hashing
 const User = require("../models/User"); // Import User model
 const jwt = require("jsonwebtoken"); // Import JWT for token generation
 const dotenv = require("dotenv"); // Import dotenv to access secret key
-const { authenticateUser, blacklistedTokens } = require("../middleware/authMiddleware");
+const {
+  authenticateUser,
+  blacklistedTokens,
+} = require("../middleware/authMiddleware");
 
 dotenv.config(); // Load environment variables
 
@@ -20,6 +23,19 @@ router.post("/register", async (req, res) => {
     // ** Validation: Check if all fields are provided **
     if (!username || !email || !password) {
       return res.status(400).json({ message: "All fields are required ❌" });
+    }
+
+    // Email format validation
+    const emailRegex = /^\S+@\S+\.\S+$/;
+    if (!emailRegex.test(email)) {
+      return res.status(400).json({ message: "Invalid email format ❌" });
+    }
+
+    // Password strength validation
+    if (password.length < 6) {
+      return res
+        .status(400)
+        .json({ message: "Password must be at least 6 characters long ❌" });
     }
 
     // ** Check if the email already exists in the database **
@@ -60,7 +76,9 @@ router.post("/login", async (req, res) => {
 
     // ** Validation: Check if both fields are provided **
     if (!email || !password) {
-      return res.status(400).json({ message: "Email and password are required ❌" });
+      return res
+        .status(400)
+        .json({ message: "Email and password are required ❌" });
     }
 
     // ** Check if the user exists in the database **
